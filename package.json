@@ -1,0 +1,19 @@
+{
+  "name": "pg-essential",
+  "version": "1.0.0",
+  "description": "All the basic functions required to interact with postgres",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha examples/test/test.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "pg": "^7.10.0",
+    "pg-spice": "^2.0.1"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.1.4"
+  }
+}
