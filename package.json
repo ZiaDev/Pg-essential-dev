@@ -10,10 +10,12 @@
   "license": "ISC",
   "dependencies": {
     "pg": "^7.10.0",
+    "pg-promise": "^8.6.5",
     "pg-spice": "^2.0.1"
   },
   "devDependencies": {
     "chai": "^4.2.0",
+    "chance": "^1.0.18",
     "mocha": "^6.1.4"
   }
 }

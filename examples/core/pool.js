@@ -1,10 +1,9 @@
 'use strict';
 
 const pg = require('pg'),
-    spice = require('pg-spice'),
     essential = require('../../index.js');
 
-spice.patch(pg);
+
 essential.patch(pg);
 
 module.exports = class {
@@ -24,13 +23,13 @@ module.exports = class {
         this.pool = new pg.Pool(this.config);
         this.pool.on('error', err => {
             console.log('Error in pool');
-           
+
         });
     }
 
     getClient() {
         return new Promise((resolve, reject) => {
-            this.pool.connect(function (err, client, done) {
+            this.pool.connect(function(err, client, done) {
                 if (err) {
                     console.log(err)
                     done();
