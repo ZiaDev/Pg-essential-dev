@@ -6,7 +6,24 @@
   "scripts": {
     "test": "mocha examples/test/test.js"
   },
-  "author": "",
+  "keywords": [
+    "pg-essential",
+    "pg",
+    "pg-spice",
+    "postgres",
+    "bulk insert",
+    "bulk-insert",
+    "postgres node",
+    "postgres transaction",
+    "postgres-transaction",
+    "postgres-SQL-Injection",
+    "postgres SQL Injection"
+  ],
+  "author": "Ziauddin <https://github.com/ZiaDev>",
+  "contributors": [
+  "Maha Aziz <https://github.com/maha-aziz>",
+  "Abdullah Waqas <abdullah-waqas>"
+  ],
   "license": "ISC",
   "dependencies": {
     "pg": "^7.10.0",
