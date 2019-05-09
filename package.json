@@ -24,6 +24,10 @@
   "Maha Aziz <https://github.com/maha-aziz>",
   "Abdullah Waqas <abdullah-waqas>"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ZiaDev/Pg-essential-dev"
+  },
   "license": "ISC",
   "dependencies": {
     "pg": "^7.10.0",
