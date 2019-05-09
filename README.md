@@ -5,11 +5,11 @@ It is developed on top of pg-spice.
 
 # Installation
 ```
-npm install pg-spice --save
+npm install pg-essential --save
 ```
 
 # Usage
-Apply pg-essential patch on your node-postgress module. Add the following code at the start of the app.
+Apply pg-essential patch on your node-postgres module and add the following code at the start of the app.
 
 ```
 var pg = require('pg');
@@ -19,26 +19,26 @@ require('pg-essential').patch(pg);
 It will add few prototype functions to pg.Client
 
 # Features
-pg-essential doesn't manage the connection pool for you. The connection will be maintained by the developer it self. It adds number of helper functions to your client object. Getting the connection from pool or closing the connection and giving it back to the pool will be the responsibilty of the developer. pg-essential will not do such things for you. However you can look into the code examples below to see how to achieve all this.
+pg-essential doesn't manage the connection pool for you. The connection is expected to be maintained by the developer. It adds number of helper functions to your client object. Getting the connection from pool or closing the connection and giving it back to the pool will be the responsibilty of the developer. pg-essential does not cater connection pooling. However, the code examples below illustrates on how to achieve all this.
 
-The test.js file contains all the code examples that are required to execute these function. Below are some explanation about each function.
+The test.js file contains all the code examples that are required to execute these functions. Some explanation about each function is mentioned below:
 
 ## fetchOne: ## 
 This function will return a Promise and the result of this Promise will be a single object, which is the first row of your query's result.
 
 ## execute: ## 
-The execute function simply execute the query and will return a promise containing the result. 
+The execute function simply executes the query and will return a promise containing the result. 
 
 ## fetchAll: ##
  
  This function will return a Promise and the result of this Promise will be an array containing all the rows of your query's result.
 
- The code below shows how can fetchOne,fetchAll,execute function can be used.
+ The code below demonstrates the usage of fetchOne, fetchAll, execute functions.
 
 ```
   return getPool().then((p) => {
         return p.getClient().then((connection) => {
-            /* you can call fetchAll,execute in a similar way. Just replace fetchOne in the  following line with respective(fetchAll,execute) function. */
+            /* you can call fetchAll, execute in a similar way. Just replace fetchOne in the following line with respective(fetchAll,execute) function. */
 
             return connection.client.fetchOne(query, params).then((results) => {
                 connection.done();
@@ -52,14 +52,14 @@ The execute function simply execute the query and will return a promise containi
 ```
 
 ## executeBulkInsertion: ##
-This function help you in Inserting multiple records in a table using a single Database call.
-It requires three arguments
+This function helps you in inserting multiple records in a table using a single Database call.
+It requires following three arguments:
 
 1) bulkData => an array of objects, where each object in the array represents a row that needs to be inserted in that table.
-2) columns => A string array conatining the name of columns to be part of the insert query.
+2) columns => A string array containing the name of columns to be part of the insert query.
 3) tableName => The table in which you want to insert the rows.
 
-And also ensures that the queries are executed in a way that no SQL injection is possible. It internally uses pg-promise helper to execute the bulk insertion.
+And it also ensures that the queries are executed in a way that no SQL injection is possible. It internally uses pg-promise helper to execute the bulk insertion.
 Here is an example of how you can use the bulkInsertion function.
 
 
