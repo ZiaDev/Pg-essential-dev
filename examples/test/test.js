@@ -1,14 +1,15 @@
 global.config = require('../../config.js')();
-let db = require('../core/db'),
+const db = require('../core/db'),
     chance = require('chance').Chance(),
     expect = require('chai').expect;
 
-describe("Pg-essential test", function() {
+describe('Pg-essential test', function() {
 
 
-    it("fetchone", async function() {
-        let result = await db.fetchOne('Select * from test');
-        expect(result).to.be.an("Object");
+    it('fetchone', async function() {
+        await db.fetchOne(`INSERT INTO test (id, name) VALUES ('12345', 'testing')`);
+        let result = await db.fetchOne('SELECT * FROM test');
+        expect(result).to.be.an('object');
     });
 
     it('bulk insertion - inserting 500 entries in test table', async () => {
@@ -28,9 +29,7 @@ describe("Pg-essential test", function() {
         expect(results).to.deep.equal(bulkData);
     });
 
-    it.only('calling executeTransaction function 500 times with 250 commits & 250 rollbacks', async function() {
-        this.timeout(9000);
-
+    it('calling executeTransaction function 20 times with 10 commits & 10 rollbacks', async function() {
         const transactionCount = 10,
             alreadyaddedID = chance.guid(),
             getTestTableRowCount = `SELECT count(*) FROM test`,
@@ -72,7 +71,7 @@ describe("Pg-essential test", function() {
         expect(rowCountAfterExecution - rowCountBeforeExecution).to.equal(transactionCount + 1);
 
         // deleting all records from test table
-        //await db.execute(lib.constants.common.db.one, `DELETE FROM test`);
+        await db.execute(`DELETE FROM test`);
     });
 
 });
