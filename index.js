@@ -6,6 +6,7 @@ let pgp = require('pg-promise')({
 function patch(pg, options) {
     spice.patch(pg, options);
     pg.Client.prototype.executeQuery = (client, config, values) => {
+
         let origQuery = pg.Client.prototype.query;
         return new Promise((resolve, reject) => {
             return origQuery.apply(client, [
@@ -31,6 +32,7 @@ function patch(pg, options) {
     };
 
     pg.Client.prototype.execute = function(config, values) {
+
         let client = this;
         return this.executeQuery(client, config, values);
     };
@@ -47,6 +49,19 @@ function patch(pg, options) {
         let client = this;
         const bulkInsertStatement = pgp.helpers.insert(bulkData, columns, table);
         return this.executeQuery(client, bulkInsertStatement);
+    }
+
+    pg.Client.prototype.executeTransaction = async function(callback) {
+        let client = this;
+
+        try {
+            await client.executeQuery(client, 'BEGIN');
+            await callback(client);
+            await client.executeQuery(client, 'COMMIT');
+        } catch (e) {
+            await client.executeQuery(client, 'ROLLBACK');
+            throw e;
+        }
     }
 }
 

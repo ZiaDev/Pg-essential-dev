@@ -42,6 +42,10 @@ module.exports = class {
         return executeQuery('fetchAll', query, params);
     }
 
+    static executeTransaction(callback) {
+        return executeQuery('executeTransaction', callback);
+    }
+
     static executeWithResult(query, params) {
         return this.getPool().then((p) => {
             return p.getClient().then((connection) => {
