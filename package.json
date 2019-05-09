@@ -1,6 +1,6 @@
 {
   "name": "pg-essential",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "All the basic functions required to interact with postgres",
   "main": "index.js",
   "scripts": {
@@ -21,8 +21,8 @@
   ],
   "author": "Ziauddin <https://github.com/ZiaDev>",
   "contributors": [
-  "Maha Aziz <https://github.com/maha-aziz>",
-  "Abdullah Waqas <abdullah-waqas>"
+    "Maha Aziz <https://github.com/maha-aziz>",
+    "Abdullah Waqas <abdullah-waqas>"
   ],
   "repository": {
     "type": "git",
