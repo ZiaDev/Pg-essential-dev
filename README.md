@@ -4,9 +4,9 @@ This package provides you basic functions for interacting with postgres using no
 It is developed on top of pg-spice. 
 
 # Installation
-
+```
 npm install pg-spice --save
-
+```
 
 # Usage
 Apply pg-essential patch on your node-postgress module. Add the following code at the start of the app.
@@ -19,15 +19,15 @@ require('pg-essential').patch(pg);
 It will add few prototype functions to pg.Client
 
 # Features
-pg-essential doesn't manage the connection pool for you. The connection will be maintained by the developer it self. It adds number of helper functions to your client object. Getting the connection from pool or closing the connection and giving it back to the pool will be the responsibilty of the developer. pg-essential will not do such things for you. However you can look into the examples code to how to achieve all this.
+pg-essential doesn't manage the connection pool for you. The connection will be maintained by the developer it self. It adds number of helper functions to your client object. Getting the connection from pool or closing the connection and giving it back to the pool will be the responsibilty of the developer. pg-essential will not do such things for you. However you can look into the code examples below to see how to achieve all this.
 
-Function provided by pg-essential. The test.js file contains all the code examples that are required to execute these function. Below are some explanation about each function.
+The test.js file contains all the code examples that are required to execute these function. Below are some explanation about each function.
 
 ## fetchOne: ## 
 This function will return a Promise and the result of this Promise will be a single object, which is the first row of your query's result.
 
 ## execute: ## 
-The execute function simply execute the query and will return a promise containing the result object. 
+The execute function simply execute the query and will return a promise containing the result. 
 
 ## fetchAll: ##
  
@@ -59,7 +59,7 @@ It requires three arguments
 2) columns => A string array conatining the name of columns to be part of the insert query.
 3) tableName => The table in which you want to insert the rows.
 
-And also ensures that the queries are executed in a way that no SQL injection is possible. It internally using pg-promise helper to execute the bulk insertion.
+And also ensures that the queries are executed in a way that no SQL injection is possible. It internally uses pg-promise helper to execute the bulk insertion.
 Here is an example of how you can use the bulkInsertion function.
 
 
@@ -75,6 +75,7 @@ Here is an example of how you can use the bulkInsertion function.
             }
             const columns = ['id', 'name'];
             await connection.executeBulkInsertion(bulkData, columns, 'test');
+            connection.done();
             });
     });
 ```
@@ -101,6 +102,10 @@ It takes the callback as an argument. The connection client will be passed to th
                         id: chance.guid(),
                         name: chance.word()
                     });
+
+                    connection.done();
+            }).catch(()=>{
+                connection.done();
             });
     });
 ```
