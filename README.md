@@ -74,7 +74,7 @@ Here is an example of how you can use the bulkInsertion function.
                 });
             }
             const columns = ['id', 'name'];
-            await connection.executeBulkInsertion(bulkData, columns, 'test');
+            await connection.client.executeBulkInsertion(bulkData, columns, 'test');
             connection.done();
             });
     });
@@ -90,7 +90,7 @@ It takes the callback as an argument. The connection client will be passed to th
   return getPool().then((p) => {
         return p.getClient().then((connection) => {
             // Insert into test and test_history table as a single transaction
-              await db.executeTransaction(async client => {
+              await connection.client.executeTransaction(async client => {
                 await client.execute(
                     `INSERT INTO test (id, name, created_at, updated_at) VALUES (:id, :name, jsNow(), jsNow())`, {
                         id: chance.guid(),
