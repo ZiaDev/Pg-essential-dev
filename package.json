@@ -21,8 +21,8 @@
   ],
   "author": "Ziauddin <https://github.com/ZiaDev>",
   "contributors": [
-  "Maha Aziz <https://github.com/maha-aziz>",
-  "Abdullah Waqas <abdullah-waqas>"
+    "Maha Aziz <https://github.com/maha-aziz>",
+    "Abdullah Waqas <abdullah-waqas>"
   ],
   "repository": {
     "type": "git",
@@ -37,6 +37,7 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "chance": "^1.0.18",
-    "mocha": "^6.1.4"
+    "mocha": "^6.1.4",
+    "lodash": "^4.17.11"
   }
 }
